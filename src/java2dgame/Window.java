@@ -10,11 +10,18 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
- *
+ * Contruct the Window of the Game
  * @author Paul
  */
 public class Window extends Canvas {
     
+    /**
+     * Constructeur
+     * @param width largeur de la fenetre
+     * @param height hauteur de la fenetre
+     * @param title titre de la fenetre
+     * @param game instance de la class Game
+     */
     public Window(int width, int height, String title, Game game){
         JFrame frame = new JFrame(title);
         
@@ -28,6 +35,7 @@ public class Window extends Canvas {
         frame.add(game);
         frame.setVisible(true);
         
+        // Lance le jeu
         game.start();
     }
 }

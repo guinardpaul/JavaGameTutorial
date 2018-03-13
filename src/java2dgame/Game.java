@@ -11,27 +11,53 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 /**
- *
+ * Class to handle the Game
  * @author Paul
  */
 public class Game extends Canvas implements Runnable{
-    
+    /**
+     * Largeur de la fenetre
+     */
     private static final int WIDTH = 640;
+    /**
+     * Hauteur de la fenetre
+     */
     private static final int HEIGHT = WIDTH / 12 * 9;
-    
+ 
+    /**
+     * Thread
+     */
     private Thread thread;
+    /**
+     * running boolean
+     */
     private boolean running = false;
     
+    /**
+     * Instance du Handler des GameObject
+     */
+    private Handler handler;
+    
+    /**
+     * Constructeur de la classe Game
+     */
     public Game(){
         new Window(WIDTH, HEIGHT, "Let's build a game", this);
+        handler = new Handler();
     }
     
+    /**
+     * Start game
+     */
     public synchronized void start(){
         thread = new Thread(this);
         thread.start();
         running=true;
     }
     
+    /**
+     * Stop game
+     */
     public synchronized void stop(){
          try {
             thread.join();
@@ -41,6 +67,9 @@ public class Game extends Canvas implements Runnable{
         }
     }
     
+    /**
+     * Game Loop
+     */
     @Override
     public void run() {
        long lastTime = System.nanoTime();
@@ -71,10 +100,16 @@ public class Game extends Canvas implements Runnable{
        stop();
     }
     
+    /**
+     * tick method
+     */
     private void tick(){
-        
+        handler.tick();
     }
     
+    /**
+     * render method
+     */
     private void render(){
         BufferStrategy bs = getBufferStrategy();
         if(bs == null){
@@ -86,12 +121,15 @@ public class Game extends Canvas implements Runnable{
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         
+        handler.render(g);
+        
         g.dispose();
         bs.show();
                
     }
 
     /**
+     * Main method
      * @param args the command line arguments
      */
     public static void main(String[] args) {

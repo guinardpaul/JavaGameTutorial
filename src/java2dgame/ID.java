@@ -7,9 +7,11 @@ package java2dgame;
 
 /**
  * Enum des types de GameObject (joueur, enemy, neutre, ...)
+ *
  * @author Paul
  */
 public enum ID {
     Player(),
+    Player2(),
     Enemy()
 }

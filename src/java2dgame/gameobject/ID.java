@@ -12,5 +12,6 @@ package java2dgame.gameobject;
  */
 public enum ID {
     Player(),
-    BasicEnemy()
+    BasicEnemy(),
+    Trail()
 }

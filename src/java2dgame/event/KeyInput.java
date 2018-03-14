@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java2dgame;
+package java2dgame.event;
 
+import java2dgame.gameobject.GameObject;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java2dgame.gameobject.ID;
 
 /**
  * KeyInput Handler
@@ -42,21 +44,7 @@ public class KeyInput extends KeyAdapter {
                     tempGameObject.setVelocityX(5);
                 }
             }
-            if (tempGameObject.getId() == ID.Player2) {
-                // Key event for player 2
-                if (key == KeyEvent.VK_UP) {
-                    tempGameObject.setVelocityY(-5);
-                }
-                if (key == KeyEvent.VK_DOWN) {
-                    tempGameObject.setVelocityY(5);
-                }
-                if (key == KeyEvent.VK_LEFT) {
-                    tempGameObject.setVelocityX(-5);
-                }
-                if (key == KeyEvent.VK_RIGHT) {
-                    tempGameObject.setVelocityX(5);
-                }
-            }
+           
         }
     }
 
@@ -79,23 +67,11 @@ public class KeyInput extends KeyAdapter {
                 }
                 if (key == KeyEvent.VK_RIGHT) {
                     tempGameObject.setVelocityX(0);
-                }
+                }   
             }
-            if (tempGameObject.getId() == ID.Player2) {
-                // Key event for player 2
-                if (key == KeyEvent.VK_UP) {
-                    tempGameObject.setVelocityY(0);
+           if(key == KeyEvent.VK_ESCAPE){
+                    System.exit(1);
                 }
-                if (key == KeyEvent.VK_DOWN) {
-                    tempGameObject.setVelocityY(0);
-                }
-                if (key == KeyEvent.VK_LEFT) {
-                    tempGameObject.setVelocityX(0);
-                }
-                if (key == KeyEvent.VK_RIGHT) {
-                    tempGameObject.setVelocityX(0);
-                }
-            }
         }
     }
 

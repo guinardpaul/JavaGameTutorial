@@ -5,6 +5,12 @@
  */
 package java2dgame;
 
+import java2dgame.event.Handler;
+import java2dgame.gameobject.ID;
+import java2dgame.event.KeyInput;
+import java2dgame.hud.HUD;
+import java2dgame.gameobject.BasicEnemy;
+import java2dgame.gameobject.Player;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -20,11 +26,11 @@ public class Game extends Canvas implements Runnable {
     /**
      * Largeur de la fenetre
      */
-    private static final int WIDTH = 640;
+    public static final int WIDTH = 640;
     /**
      * Hauteur de la fenetre
      */
-    private static final int HEIGHT = WIDTH / 12 * 9;
+    public static final int HEIGHT = WIDTH / 12 * 9;
 
     /**
      * Thread
@@ -40,6 +46,7 @@ public class Game extends Canvas implements Runnable {
      */
     private Handler handler;
 
+    private HUD hud;
     /**
      * Constructeur de la classe Game
      */
@@ -49,8 +56,10 @@ public class Game extends Canvas implements Runnable {
 
         new Window(WIDTH, HEIGHT, "Let's build a game", this);
 
+        hud = new HUD();
+        
         handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player));
-        handler.addObject(new Player(WIDTH / 2 + 64, HEIGHT / 2 - 32, ID.Player2));
+        handler.addObject(new BasicEnemy(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.BasicEnemy));
     }
 
     /**
@@ -79,6 +88,7 @@ public class Game extends Canvas implements Runnable {
      */
     @Override
     public void run() {
+        this.requestFocus();
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
@@ -107,12 +117,23 @@ public class Game extends Canvas implements Runnable {
         }
         stop();
     }
+    
+    public static int clamp(int var, int min, int max){
+        if(var >= max){
+            return var = max;
+        }else if(var <= min){
+            return var = min;
+        }else {
+            return var;
+        }
+    }
 
     /**
      * tick method
      */
     private void tick() {
         handler.tick();
+        hud.tick();
     }
 
     /**
@@ -130,6 +151,8 @@ public class Game extends Canvas implements Runnable {
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         handler.render(g);
+        
+        hud.render(g);
 
         g.dispose();
         bs.show();

@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java2dgame;
+package java2dgame.gameobject;
 
+import java2dgame.gameobject.GameObject;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
+import java2dgame.Game;
 
 /**
  *
@@ -25,14 +27,15 @@ public class Player extends GameObject {
     public void tick() {
         x += velocityX;
         y += velocityY;
+        
+        x = Game.clamp(x,0,Game.WIDTH - 37);
+        y = Game.clamp(y,0,Game.HEIGHT - 60);
     }
 
     @Override
     public void render(Graphics g) {
         if (id == ID.Player) {
             g.setColor(Color.white);
-        } else if (id == ID.Player2) {
-            g.setColor(Color.blue);
         }
 
         g.fillRect(x, y, 32, 32);

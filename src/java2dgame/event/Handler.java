@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java2dgame;
+package java2dgame.event;
 
+import java2dgame.gameobject.GameObject;
 import java.awt.Graphics;
 import java.util.LinkedList;
 

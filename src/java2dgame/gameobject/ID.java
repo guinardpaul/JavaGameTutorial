@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java2dgame;
+package java2dgame.gameobject;
 
 /**
  * Enum des types de GameObject (joueur, enemy, neutre, ...)
@@ -12,6 +12,5 @@ package java2dgame;
  */
 public enum ID {
     Player(),
-    Player2(),
-    Enemy()
+    BasicEnemy()
 }

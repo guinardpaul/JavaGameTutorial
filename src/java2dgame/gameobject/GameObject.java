@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java2dgame;
+package java2dgame.gameobject;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  * Abstract class for Objects of the game
@@ -48,6 +49,7 @@ public abstract class GameObject {
     // Public or protected ?
     public abstract void tick();
     public abstract void render(Graphics g);
+    public abstract Rectangle getBounds();
 
     public int getX () {
         return x;

@@ -5,16 +5,16 @@
  */
 package java2dgame;
 
-import java2dgame.event.Handler;
-import java2dgame.gameobject.ID;
-import java2dgame.event.KeyInput;
-import java2dgame.hud.HUD;
-import java2dgame.gameobject.BasicEnemy;
-import java2dgame.gameobject.Player;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java2dgame.event.Handler;
+import java2dgame.event.KeyInput;
+import java2dgame.gameobject.BasicEnemy;
+import java2dgame.gameobject.ID;
+import java2dgame.gameobject.Player;
+import java2dgame.hud.HUD;
 
 /**
  * Class to handle the Game
@@ -47,6 +47,7 @@ public class Game extends Canvas implements Runnable {
     private Handler handler;
 
     private HUD hud;
+
     /**
      * Constructeur de la classe Game
      */
@@ -57,8 +58,8 @@ public class Game extends Canvas implements Runnable {
         new Window(WIDTH, HEIGHT, "Let's build a game", this);
 
         hud = new HUD();
-        
-        handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player));
+
+        handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
         handler.addObject(new BasicEnemy(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.BasicEnemy));
     }
 
@@ -117,13 +118,13 @@ public class Game extends Canvas implements Runnable {
         }
         stop();
     }
-    
-    public static int clamp(int var, int min, int max){
-        if(var >= max){
+
+    public static int clamp(int var, int min, int max) {
+        if (var >= max) {
             return var = max;
-        }else if(var <= min){
+        } else if (var <= min) {
             return var = min;
-        }else {
+        } else {
             return var;
         }
     }
@@ -151,7 +152,7 @@ public class Game extends Canvas implements Runnable {
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         handler.render(g);
-        
+
         hud.render(g);
 
         g.dispose();

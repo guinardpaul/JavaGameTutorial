@@ -5,56 +5,62 @@
  */
 package java2dgame.event;
 
-import java2dgame.gameobject.GameObject;
 import java.awt.Graphics;
 import java.util.LinkedList;
+import java2dgame.gameobject.GameObject;
 
 /**
  * Handler to render game objects
+ *
  * @author Paul
  */
 public class Handler {
+
     /**
      * List des GameObject du jeu
      */
-    LinkedList<GameObject> objects = new LinkedList<>();
-    
+    public LinkedList<GameObject> objects = new LinkedList<>();
+
     /**
      * Tick methode sur tous les ObjectGame de objects list
      */
-    public void tick(){
-        for(int i = 0; i < objects.size(); i++){
+    public void tick() {
+        for (int i = 0; i < objects.size(); i++) {
             GameObject tempGameObject = objects.get(i);
-            
+
             tempGameObject.tick();
         }
     }
-    
+
     /**
      * Render methode sur tous les ObjectGame de objects list
+     *
      * @param g Graphics
      */
-    public  void render(Graphics g){
-         for(int i = 0; i < objects.size(); i++){
+    public void render(Graphics g) {
+        for (int i = 0; i < objects.size(); i++) {
             GameObject tempGameObject = objects.get(i);
-            
+
             tempGameObject.render(g);
         }
     }
-    
+
     /**
      * Add GameObject to the game
+     *
      * @param obj Game Object
      */
-    public void addObject(GameObject obj){
+    public void addObject(GameObject obj) {
         this.objects.add(obj);
     }
-    
+
     /**
      * Remove GameObject to the game
+     *
      * @param obj Game Object
      */
-    public void removeObject(GameObject obj){
+    public void removeObject(GameObject obj) {
         this.objects.remove(obj);
     }
+
 }

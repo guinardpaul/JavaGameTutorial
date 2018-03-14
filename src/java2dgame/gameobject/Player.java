@@ -5,11 +5,13 @@
  */
 package java2dgame.gameobject;
 
-import java2dgame.gameobject.GameObject;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.Random;
 import java2dgame.Game;
+import java2dgame.event.Handler;
+import java2dgame.hud.HUD;
 
 /**
  *
@@ -18,18 +20,40 @@ import java2dgame.Game;
 public class Player extends GameObject {
 
     Random r = new Random();
+    Handler handler;
 
-    public Player(int x, int y, ID id) {
+    public Player(int x, int y, ID id, Handler handler) {
         super(x, y, id);
+        this.handler = handler;
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, 32, 32);
     }
 
     @Override
     public void tick() {
         x += velocityX;
         y += velocityY;
-        
-        x = Game.clamp(x,0,Game.WIDTH - 37);
-        y = Game.clamp(y,0,Game.HEIGHT - 60);
+
+        x = Game.clamp(x, 0, Game.WIDTH - 37);
+        y = Game.clamp(y, 0, Game.HEIGHT - 60);
+
+        collision();
+    }
+
+    private void collision() {
+        for (int i = 0; i < handler.objects.size(); i++) {
+            GameObject tempGameObject = handler.objects.get(i);
+
+            if (tempGameObject.getId() == ID.BasicEnemy) {
+                if (getBounds().intersects(tempGameObject.getBounds())) {
+                    // Collision code
+                    HUD.currentHealth -= 2;
+                }
+            }
+        }
     }
 
     @Override
@@ -40,4 +64,5 @@ public class Player extends GameObject {
 
         g.fillRect(x, y, 32, 32);
     }
+
 }

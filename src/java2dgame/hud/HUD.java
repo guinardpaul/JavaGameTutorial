@@ -14,17 +14,15 @@ import java2dgame.Game;
  * @author Paul
  */
 public class HUD {
-    
-    public static final int HEALTH= 100;
+
+    public static final int HEALTH = 100;
     public static int currentHealth = HEALTH;
-    
-    public void tick(){
-        currentHealth --;
-        
+
+    public void tick() {
         currentHealth = Game.clamp(currentHealth, 0, HEALTH);
     }
-    
-    public void render(Graphics g){
+
+    public void render(Graphics g) {
         g.setColor(Color.gray);
         g.fillRect(15, 15, 200, 32);
         g.setColor(Color.green);
@@ -32,4 +30,5 @@ public class HUD {
         g.setColor(Color.white);
         g.drawRect(15, 15, 200, 32);
     }
+
 }

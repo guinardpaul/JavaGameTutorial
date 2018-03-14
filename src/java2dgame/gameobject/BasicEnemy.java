@@ -5,9 +5,9 @@
  */
 package java2dgame.gameobject;
 
-import java2dgame.gameobject.GameObject;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java2dgame.Game;
 
 /**
@@ -16,30 +16,35 @@ import java2dgame.Game;
  */
 public class BasicEnemy extends GameObject {
 
-    public BasicEnemy (int x, int y, ID id) {
+    public BasicEnemy(int x, int y, ID id) {
         super(x, y, id);
-        velocityX=5;
-        velocityY=5;
+        velocityX = 5;
+        velocityY = 5;
     }
 
     @Override
-    public void tick () {
-        x+=velocityX;
-        y+=velocityY;
-        
-        if(y <= 0 || y >= Game.HEIGHT - 32){
-            velocityY *=-1;
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, 16, 16);
+    }
+
+    @Override
+    public void tick() {
+        x += velocityX;
+        y += velocityY;
+
+        if (y <= 0 || y >= Game.HEIGHT - 32) {
+            velocityY *= -1;
         }
-        
-        if(x <= 0 || x >= Game.WIDTH - 32){
-            velocityX *=-1;
+
+        if (x <= 0 || x >= Game.WIDTH - 32) {
+            velocityX *= -1;
         }
     }
 
     @Override
-    public void render (Graphics g) {
+    public void render(Graphics g) {
         g.setColor(Color.red);
         g.fillRect(x, y, 16, 16);
     }
-    
+
 }
